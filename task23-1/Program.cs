@@ -7,27 +7,35 @@
 массив [1.22 4.5 3.33] => 3.28
 */
 
-Console.Write("Введите массив: ");
-int n = Convert.ToInt32(Console.ReadLine());
-double max = 0;
-double a;
-double[] array = new double[n];
-for (int i = 0; i < array.Length; i++)
-    array[i] = new Random().NextDouble() * 100;
-double min = array[0];
-for (int i = 0; i < array.Length; i++)
+Console.Write("Введите количество элементов массива: ");
+int a = Convert.ToInt32(Console.ReadLine());
+double[] randomArray = new double[a];
+
+void mas(int a)
 {
-    if (max < array[i])
-        max = array[i];
+    Random rand = new Random();
+    for (int i = 0; i < a; i++)
+    {
+        randomArray[i] = rand.NextDouble();
+        Console.Write($"{randomArray[i]:F2} "); //
+    }
+
 }
-Console.Write(max);
-for (int i = 0; i < array.Length; i++)
+double raz(double[] randomArray)
 {
-    if (min > array[i])
-        min = array[i];
+    double min = randomArray[0];
+    double max = randomArray[0];
+    int i = 1;
+    while (i < randomArray.Length)
+    {
+        if (max < randomArray[i])
+            max = randomArray[i];
+        if (min > randomArray[i])
+            min = randomArray[i];
+        i = i + 1;
+    }
+    return max - min;
 }
-a = max - min;
-Console.WriteLine("  и  " + min);
-Console.WriteLine("\n");
-Console.WriteLine("разница: ");
-Console.WriteLine(a);
+
+mas(a);
+Console.Write($"\nРазница между макс и мин эл массива: {raz(randomArray):F2}");
